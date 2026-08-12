@@ -1,39 +1,34 @@
 import Link from "next/link";
-import { Header, Footer, PortfolioSection } from "./components";
+import { Footer, Header, PortfolioSection } from "./components";
 import { categories } from "./data";
 
 export default function Home() {
   return (
-    <main id="top" className="home-page">
+    <main id="top">
       <Header />
-      <section className="home-hero">
-        <p className="eyebrow">PORTFOLIO / SELECTED WORKS / 2026</p>
-        <h1><span>写作，产品，</span><span>影像与声音。</span></h1>
-        <div className="home-intro">
-          <p>横跨文学写作、AI 产品、AIGC 影视、广告营销与声音创作的精选项目。</p>
-          <span>SCROLL TO EXPLORE ↓</span>
+      <section className="cover">
+        <div className="cover-kicker"><span>PORTFOLIO</span><span>2017—2026</span></div>
+        <div className="cover-title">
+          <p>SELECTED WORKS</p>
+          <h1>文字、智能<br /><i>与影像叙事</i></h1>
+        </div>
+        <div className="cover-bottom">
+          <p>文学 / AI 产品 / AIGC 影视<br />广告营销 / 配音 / 影视作品</p>
+          <span>六个篇章<br />一个网址</span>
         </div>
       </section>
-      <section className="category-grid" aria-label="作品分类">
+      <section className="contents" aria-label="作品目录">
+        <header><span>CONTENTS</span><span>作品目录</span><span>VOL. 01</span></header>
         {categories.map((category) => (
-          <Link href={`#${category.slug}`} key={category.slug} className="category-tile" style={{ "--tile-accent": category.accent } as React.CSSProperties}>
-            <div className="tile-top"><span>{category.number}</span><span>{category.en}</span></div>
-            <div className="tile-shape" aria-hidden="true"><i /><i /><i /></div>
-            <div className="tile-bottom">
-              <h2>{category.title}</h2>
-              <span aria-hidden="true">↗</span>
-            </div>
-            <p>{category.intro}</p>
+          <Link href={`#${category.slug}`} key={category.slug} style={{ "--accent": category.accent } as React.CSSProperties}>
+            <span>{category.number}</span>
+            <strong>{category.title}</strong>
+            <em>{category.en}</em>
+            <span>{String(category.projects.length).padStart(2, "0")}</span>
           </Link>
         ))}
       </section>
-      <section className="home-statement">
-        <p>ABOUT THE WORK</p>
-        <blockquote>“把复杂的信息整理成清晰的叙事，再把叙事变成可以被体验的作品。”</blockquote>
-      </section>
-      <div className="all-work" aria-label="全部作品">
-        {categories.map((category) => <PortfolioSection category={category} key={category.slug} />)}
-      </div>
+      {categories.map((category) => <PortfolioSection category={category} key={category.slug} />)}
       <Footer />
     </main>
   );

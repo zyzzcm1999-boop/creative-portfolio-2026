@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "创意作品集｜写作、AI产品与影像",
-  description: "文学写作、AI产品、AIGC影视、广告营销、配音与影像创作精选作品。",
+  title: "张语酌创意作品集｜文学、AI 产品与影视",
+  description: "张语酌的文学作品、AI 产品、AIGC 影视作品、广告营销、配音作品与其他影视作品。",
 };
 
 export default function RootLayout({
