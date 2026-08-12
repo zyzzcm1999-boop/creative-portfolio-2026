@@ -10,7 +10,7 @@ export function Header({ active }: { active?: string }) {
       </Link>
       <nav className="desktop-nav" aria-label="作品集分类">
         {categories.map((item) => (
-          <Link key={item.slug} href={`/${item.slug}`} className={active === item.slug ? "active" : ""}>
+          <Link key={item.slug} href={`/#${item.slug}`} className={active === item.slug ? "active" : ""}>
             {item.number} {item.title}
           </Link>
         ))}
@@ -28,7 +28,7 @@ export function Footer({ current }: { current?: string }) {
       </div>
       <nav aria-label="底部分类导航">
         {categories.map((item) => (
-          <Link key={item.slug} href={`/${item.slug}`} aria-current={current === item.slug ? "page" : undefined}>
+          <Link key={item.slug} href={`/#${item.slug}`} aria-current={current === item.slug ? "page" : undefined}>
             {item.title}
           </Link>
         ))}
@@ -100,6 +100,34 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
         {project.media?.map((item) => <Media key={item.src} item={item} />)}
       </div>
     </article>
+  );
+}
+
+export function PortfolioSection({ category }: { category: Category }) {
+  return (
+    <section id={category.slug} className="portfolio-section" style={{ "--accent": category.accent } as React.CSSProperties}>
+      <div className="section-anchor" aria-hidden="true" />
+      <div className="category-hero">
+        <div className="hero-index">{category.number}</div>
+        <div className="hero-copy">
+          <p className="eyebrow">{category.en}</p>
+          <h1>{category.title}</h1>
+          <p className="category-intro">{category.intro}</p>
+          <div className="hero-facts">
+            <span>{category.projects.length} 个项目</span>
+            <span>精选案例</span>
+            <span>2024—2026</span>
+          </div>
+        </div>
+      </div>
+      {category.note && <p className="category-note">{category.note}</p>}
+      <div className="project-list" aria-label={`${category.title}项目`}>
+        {category.projects.map((project, index) => <ProjectCard key={project.title} project={project} index={index} />)}
+      </div>
+      <a href="#top" className="back-to-top" aria-label="返回页面顶部">
+        <span>END / {category.number}</span><strong>返回顶部</strong><span aria-hidden="true">↑</span>
+      </a>
+    </section>
   );
 }
 

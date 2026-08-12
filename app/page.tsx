@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { Header, Footer } from "./components";
+import { Header, Footer, PortfolioSection } from "./components";
 import { categories } from "./data";
 
 export default function Home() {
   return (
-    <main className="home-page">
+    <main id="top" className="home-page">
       <Header />
       <section className="home-hero">
         <p className="eyebrow">PORTFOLIO / SELECTED WORKS / 2026</p>
@@ -16,7 +16,7 @@ export default function Home() {
       </section>
       <section className="category-grid" aria-label="作品分类">
         {categories.map((category) => (
-          <Link href={`/${category.slug}`} key={category.slug} className="category-tile" style={{ "--tile-accent": category.accent } as React.CSSProperties}>
+          <Link href={`#${category.slug}`} key={category.slug} className="category-tile" style={{ "--tile-accent": category.accent } as React.CSSProperties}>
             <div className="tile-top"><span>{category.number}</span><span>{category.en}</span></div>
             <div className="tile-shape" aria-hidden="true"><i /><i /><i /></div>
             <div className="tile-bottom">
@@ -31,6 +31,9 @@ export default function Home() {
         <p>ABOUT THE WORK</p>
         <blockquote>“把复杂的信息整理成清晰的叙事，再把叙事变成可以被体验的作品。”</blockquote>
       </section>
+      <div className="all-work" aria-label="全部作品">
+        {categories.map((category) => <PortfolioSection category={category} key={category.slug} />)}
+      </div>
       <Footer />
     </main>
   );
